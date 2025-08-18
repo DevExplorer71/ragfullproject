@@ -1,0 +1,11 @@
+i want to create an app where individuals can upload documents under a topic.
+
+the app could use something like rag to take the documents split them up and store them in firestore
+
+i could use open ai for the llm
+
+the user could ask questions in the app and would recieve ai based answers
+
+is firestore a good backend for this app?
+
+also want to user firebase auth for authentication.
