@@ -15,9 +15,11 @@ export default function LoginPage() {
   }, [router]);
 
   return (
-    <div>
-      <h2>Login</h2>
+    <Container maxWidth="xs" sx={{ mt: 8 }}>
+      <Typography variant="h4" align="center" gutterBottom>Login</Typography>
       <FirebaseAuth />
-    </div>
+    </Container>
   );
 }
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';

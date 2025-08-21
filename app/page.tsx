@@ -1,6 +1,9 @@
 "use client";
 import Image from "next/image";
 import styles from "./page.module.css";
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -8,9 +11,9 @@ import { useRouter } from "next/navigation";
 export default function Home() {
   const router = useRouter();
   return (
-    <div>
-      <h1>Welcome to the app</h1>
-      <button onClick={() => router.push("/login")}>Go to Login</button>
-    </div>
+    <Container maxWidth="sm" sx={{ mt: 8, textAlign: 'center' }}>
+      <Typography variant="h3" gutterBottom>Welcome to the app</Typography>
+      <Button variant="contained" color="primary" onClick={() => router.push("/login")}>Go to Login</Button>
+    </Container>
   );
 }

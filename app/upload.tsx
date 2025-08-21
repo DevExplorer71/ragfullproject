@@ -1,9 +1,18 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { db } from "./firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
 
 export default function Upload() {
+  const router = require('next/navigation').useRouter();
+  const auth = require('./firebaseConfig').auth;
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    const unsub = auth.onAuthStateChanged((user: any) => {
+      if (!user) router.push('/login');
+    });
+    return () => unsub();
+  }, [router]);
   const [topic, setTopic] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [status, setStatus] = useState("");
