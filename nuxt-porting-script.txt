@@ -1,0 +1,31 @@
+AI Script for Porting Next.js App to Nuxt 3
+
+1. Set up Nuxt project:
+   - Create a new Nuxt 3 app (`npx nuxi init <project-name>`)
+   - Install dependencies (`npm install`)
+
+2. Configure Firebase:
+   - Add Firebase config and authentication logic in Nuxt composables or plugins.
+
+3. Routing:
+   - Use Nuxt’s file-based routing to replicate dynamic topic pages and nested routes.
+
+4. API routes:
+   - Use Nuxt server routes (`server/api/`) to implement endpoints like `/ask` and `/sessionLogin`.
+
+5. File upload:
+   - Implement file upload using Nuxt’s server API and composables.
+
+6. Global styles and layout:
+   - Move global CSS to `assets/` and set up layouts in `layouts/`.
+
+7. Document handling:
+   - Place static documents in the `public/` folder for direct access.
+
+8. UI Components:
+   - Port React components to Vue components.
+
+9. Testing and validation:
+   - Test all features to ensure parity with the Next.js app.
+
+Note: Adjust and expand each step as needed for your specific requirements.
