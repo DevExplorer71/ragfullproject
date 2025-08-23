@@ -18,6 +18,9 @@ export default function Home() {
       <Typography variant="body2" sx={{ mt: 4, color: 'text.secondary', fontSize: { xs: '0.9rem', md: '1rem' } }}>
         Get started by logging in from the navbar above!
       </Typography>
+      <Typography variant="body2" sx={{ mt: 4, color: 'error.main', fontSize: { xs: '0.9rem', md: '1rem' } }}>
+        OpenAI Key: {process.env.OPENAI_API_KEY}
+      </Typography>
     </Container>
   );
 }
