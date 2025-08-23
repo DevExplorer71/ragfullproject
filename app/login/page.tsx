@@ -15,20 +15,23 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isRegister, setIsRegister] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
     try {
       if (isRegister) {
         await createUserWithEmailAndPassword(auth, email, password);
       } else {
         await signInWithEmailAndPassword(auth, email, password);
       }
+      setLoading(false);
       router.push("/topics");
-  
     } catch (err: any) {
       setError(err.message);
+      setLoading(false);
     }
   };
 
@@ -46,6 +49,7 @@ export default function LoginPage() {
           required
           variant="outlined"
           fullWidth
+          disabled={loading}
         />
         <TextField
           label="Password"
@@ -55,12 +59,13 @@ export default function LoginPage() {
           required
           variant="outlined"
           fullWidth
+          disabled={loading}
         />
-        <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
-          {isRegister ? "Register" : "Login"}
+        <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }} disabled={loading}>
+          {loading ? "Loading..." : isRegister ? "Register" : "Login"}
         </Button>
       </form>
-      <Button onClick={() => setIsRegister(r => !r)} color="secondary" fullWidth sx={{ mt: 2 }}>
+      <Button onClick={() => setIsRegister(r => !r)} color="secondary" fullWidth sx={{ mt: 2 }} disabled={loading}>
         {isRegister ? "Already have an account? Login" : "Need an account? Register"}
       </Button>
       {error && <Alert severity="error" sx={{ mt: 2 }}>{error}</Alert>}

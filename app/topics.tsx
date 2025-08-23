@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "./AuthContext";
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
@@ -11,7 +11,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { useRouter } from "next/navigation";
-import { db, auth } from "../firebaseConfig";
+import { db, auth } from "./firebaseConfig";
 import { collection, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore";
 
 export default function TopicsPage() {
