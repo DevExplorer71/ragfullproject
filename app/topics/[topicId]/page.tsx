@@ -25,7 +25,7 @@ export default function TopicDetails() {
   const router = useRouter();
   const params = useParams();
   const topicId = params?.topicId as string;
-  const [documents, setDocuments] = useState<any[]>([]);
+  const [documents, setDocuments] = useState<Array<{ id: string; fileName: string; chunk?: string }>>([]);
   const [file, setFile] = useState<File | null>(null);
   const [status, setStatus] = useState("");
   const [question, setQuestion] = useState("");
@@ -68,7 +68,7 @@ export default function TopicDetails() {
   };
 
   useEffect(() => {
-    let unsub: any;
+  let unsub: (() => void) | undefined;
     let didFetch = false;
     unsub = auth.onAuthStateChanged((user) => {
       if (!user) {

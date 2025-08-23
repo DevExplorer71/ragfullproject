@@ -8,12 +8,13 @@ import { useEffect, useState } from 'react';
 import { auth } from './firebaseConfig';
 
 export default function Navbar() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<null | { uid: string; email?: string }>(null);
   useEffect(() => {
     const unsub = auth.onAuthStateChanged(setUser);
     return () => unsub();
   }, []);
-  const router = require('next/navigation').useRouter();
+  import { useRouter } from 'next/navigation';
+  const router = useRouter();
   const handleLogout = async () => {
     await auth.signOut();
     setUser(null);

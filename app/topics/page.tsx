@@ -19,7 +19,7 @@ import { collection, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore"
 
 
 export default function TopicsPage() {
-  const [topics, setTopics] = useState<any[]>([]);
+  const [topics, setTopics] = useState<Array<{ id: string; name: string }>>([]);
   const [newTopic, setNewTopic] = useState("");
   const router = useRouter();
 

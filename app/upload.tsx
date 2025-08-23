@@ -4,14 +4,15 @@ import { db } from "./firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
 
 export default function Upload() {
-  const router = require('next/navigation').useRouter();
-  const auth = require('./firebaseConfig').auth;
+  import { useRouter } from 'next/navigation';
+  import { auth } from './firebaseConfig';
+  const router = useRouter();
   // Redirect to login if not authenticated
   useEffect(() => {
-    const unsub = auth.onAuthStateChanged((user: any) => {
+    const unsub = auth.onAuthStateChanged((user) => {
       if (!user) router.push('/login');
     });
-    return () => unsub();
+    return () => { if (unsub) unsub(); };
   }, [router]);
   const [topic, setTopic] = useState("");
   const [file, setFile] = useState<File | null>(null);

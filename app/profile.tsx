@@ -6,7 +6,7 @@ import Avatar from '@mui/material/Avatar';
 import { useEffect, useState } from 'react';
 import { auth } from './firebaseConfig';
 export default function ProfilePage() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<null | { uid: string; email?: string }>(null);
 
   useEffect(() => {
     setUser(auth.currentUser);
