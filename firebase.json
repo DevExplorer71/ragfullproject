@@ -7,8 +7,25 @@
       "**/node_modules/**"
     ],
     "rewrites": [
-      { "source": "/api/**", "function": "nextjs-server" },
-      { "source": "**", "function": "nextjs-server" }
+      {
+        "source": "/api/**",
+        "function": "nextjs-server"
+      },
+      {
+        "source": "**",
+        "function": "nextjs-server"
+      }
+    ]
+  },
+  "apphosting": {
+    "backendId": "ragtutorialiallbackend",
+    "rootDir": ".",
+    "ignore": [
+      "node_modules",
+      ".git",
+      "firebase-debug.log",
+      "firebase-debug.*.log",
+      "functions"
     ]
   }
 }
