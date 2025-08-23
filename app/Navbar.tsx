@@ -10,6 +10,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
+import Box from '@mui/material/Box';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { auth } from './firebaseConfig';
@@ -61,7 +62,7 @@ export default function Navbar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>RAG Full Tutorial</Typography>
-          <div style={{ display: 'none', '@media (min-width: 900px)': { display: 'flex' } }}>
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
             {navLinks.map(link => (
               <Button
                 key={link.text}
@@ -79,7 +80,7 @@ export default function Navbar() {
             {user && (
               <Button color="inherit" onClick={handleLogout} sx={{ display: { xs: 'none', md: 'inline-flex' } }}>Logout</Button>
             )}
-          </div>
+          </Box>
         </Toolbar>
       </AppBar>
       <Drawer
