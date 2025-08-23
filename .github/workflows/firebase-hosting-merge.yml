@@ -17,6 +17,7 @@ jobs:
       - run: npm ci && npm run build
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       - run: npm install @mui/icons-material
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
