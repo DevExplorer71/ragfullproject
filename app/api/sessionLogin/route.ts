@@ -2,9 +2,23 @@ import { NextResponse } from "next/server";
 import admin from "firebase-admin";
 
 if (!admin.apps.length) {
-  const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT ? JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT) : undefined;
-  if (!serviceAccount) {
-    throw new Error('Missing FIREBASE_SERVICE_ACCOUNT environment variable');
+  let serviceAccount;
+  if (process.env.FIREBASE_SERVICE_ACCOUNT) {
+    serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+  } else {
+    serviceAccount = {
+      "type": "service_account",
+      "project_id": "myragexample",
+      "private_key_id": "1271840a2b99dd8d7bda8e9764122f557d282269",
+      "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEugIBADANBgkqhkiG9w0BAQEFAASCBKQwggSgAgEAAoIBAQC18+8Y+rjo/ubf\nUfiOCP+dvFsbDlgBuqqHMj+3kBWt3zjsW1kbchhfswGkBPFmcfKyfyYk5t0yLg0V\nLYm2XgnRa3WKlNWXvgnJ5+MEqq9u8AOiqzkf6jBuYc9pICsUA6c5HQSkDMl0CWx+\n5zYV+RcFqOJtDqm9zeTxflsPq1QBO4Fh4DmY3nsmVz3PEuNC+C8NCWwycNuRs9yQ\nCf4AWzbK/ZOgLlis6S9T9IXvbF3dZTknbrIb5rxHanvWALRirN5j5e2l7yJ0+hud\nfQ2yd+28phemlI9jFmNz5/dNcR6+lt90+x0PoYZIQvFyCmOQV7gJFJQhDCTuX8jq\nYvB8lyFpAgMBAAECggEAJlSC8/Itbff0zurHv7QplSMO1j5JT+Pw9JYjUhoqVvyF\nU1VTCjMY62AcYl8gM4Khq/SZJoDz7BRDcUiskBxzWQiYNF9yN4szKLOO4XbLikVJ\nnsUPPafqF/bG6NB8ArVaTu/MAHspHSa3EmzGug5FSU3wlSTXoUJ0jmMd78kZ40A4\naceh+FIghlCcjq8KC7IGBK8XLGgZGW7rD4PRkbV8sGQfdIaJ1VQZ1nYSmlpH0QBH\nI3mHxj8PjY36SdqIWTSfvNfClD6j52ZvGU7XsWyrp9s3N5htF32oVZ4K/WMYhlJk\n+7MqNxdijnX93c7qJ0ZflpCtClvYN1Xyot8ZUWBOYQKBgQDv9a/hXMzdw7/42nYL\nwbeFi++PcyS545y2vf5+FJOAjHGTph9P3ZH2iQNUnmd2KPa2C/DlkHtiPd+8koFC\nk4A/ITeL4K0KAzqbpsRrQ4K+pvBLfDrkj1Ssj27ADQF3zgrPKompIU5Jln8R4/Ah\nwodB5aDhPCujOXzuSGrQAkkKNQKBgQDCHZqsRVadafyk+4SckAxgi1pkth0d1PSc\ntUAaidrzqO37cLtc/v8fYP21LxtWrWu6Z/xsFv42nAAphCjPO2iI1W/nY42GN1UX\nwj8f2d41RK5cTRGZBxshYL1LENqlGJ6LhglbHbpEQz2eSeNfGQz3/m+W8xnw8NAg\nX//WTF0A5QKBgBkQAy+5npgnAtz+DEhMElv7cqj78MENmeeoTnVitsk9Yft25VxV\nGxKx2swyw0GfI61978o6Xfiz17N9ZczLVSDC2mdcrxYVokBxmaBOa9B35S8tKYWH\nxuNDE+ExOo8F0TE0Ey68EM40zs7SjNkp1TC3yCbePvyMW5UTsTxKkNBlAoGAW9HV\nEBfcWKmBsCipGcWplSFVqL3cF/hbnKS/pc3/m7IUoBM7DUoxM46Vc9bMf7uYcZwu\ncpKNvRcdnIW/KAdZ8x/Cxxj4ILybq5lecpqD2X6bW125LUGHO8qev5tBUUbL+AN2\n+XqeWRvVUcJxotIeqE/aSPTFGItQZ4ABbETC2WECf2GczHYO5xp0Cfp0RL3cUBKv\nh0fmrLHoynu1wCWc4jVAIMMiFTpfRHGUCUVJtC80KRbxqc5UZI0WxMLD7gKZuSaU\nk1ObIonASo7dW0Q6vvaK9OzDlvjJGYCXdUpaTkHp0Tu+Fs0Mc3WZzQt/C1PwjA6O\nQsGvrk3TlyW38QT5Qe4=\n-----END PRIVATE KEY-----\n",
+      "client_email": "firebase-adminsdk-fbsvc@myragexample.iam.gserviceaccount.com",
+      "client_id": "103494552414950027545",
+      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+      "token_uri": "https://oauth2.googleapis.com/token",
+      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+      "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40myragexample.iam.gserviceaccount.com",
+      "universe_domain": "googleapis.com"
+    };
   }
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
