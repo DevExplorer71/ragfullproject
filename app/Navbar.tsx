@@ -6,14 +6,22 @@ import Button from '@mui/material/Button';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { auth } from './firebaseConfig';
+import { User } from 'firebase/auth';
+ import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
-  const [user, setUser] = useState<null | { uid: string; email?: string }>(null);
+  const [user, setUser] = useState<null | { uid: string; email?: string | null }>(null);
   useEffect(() => {
-    const unsub = auth.onAuthStateChanged(setUser);
+    const unsub = auth.onAuthStateChanged((u: User | null) => {
+      if (u) {
+        setUser({ uid: u.uid, email: u.email ?? null });
+      } else {
+        setUser(null);
+      }
+    });
     return () => unsub();
   }, []);
-  import { useRouter } from 'next/navigation';
+ 
   const router = useRouter();
   const handleLogout = async () => {
     await auth.signOut();

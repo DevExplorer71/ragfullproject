@@ -1,21 +1,21 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useRouter } from 'next/navigation';
 import { db } from "./firebaseConfig";
+import { auth } from "./firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
 
 export default function Upload() {
-  import { useRouter } from 'next/navigation';
-  import { auth } from './firebaseConfig';
   const router = useRouter();
+  const [topic, setTopic] = useState("");
+  const [file, setFile] = useState<File | null>(null);
   // Redirect to login if not authenticated
   useEffect(() => {
-    const unsub = auth.onAuthStateChanged((user) => {
+  const unsub = auth.onAuthStateChanged((user: import('firebase/auth').User | null) => {
       if (!user) router.push('/login');
     });
     return () => { if (unsub) unsub(); };
   }, [router]);
-  const [topic, setTopic] = useState("");
-  const [file, setFile] = useState<File | null>(null);
   const [status, setStatus] = useState("");
 
   const handleUpload = async () => {
@@ -28,7 +28,7 @@ export default function Upload() {
         uploaded: new Date().toISOString(),
       });
       setStatus("Uploaded!");
-    } catch (e) {
+    } catch {
       setStatus("Error uploading");
     }
   };

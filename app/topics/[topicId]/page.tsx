@@ -68,9 +68,8 @@ export default function TopicDetails() {
   };
 
   useEffect(() => {
-  let unsub: (() => void) | undefined;
-    let didFetch = false;
-    unsub = auth.onAuthStateChanged((user) => {
+  let didFetch = false;
+  const unsub = auth.onAuthStateChanged((user) => {
       if (!user) {
         router.push("/login");
       } else if (!didFetch) {
@@ -78,7 +77,7 @@ export default function TopicDetails() {
         const fetchDocs = async () => {
           const q = query(collection(db, "documents"), where("topicId", "==", topicId));
           const snapshot = await getDocs(q);
-          setDocuments(snapshot.docs.map(d => ({ id: d.id, ...d.data() })));
+          setDocuments(snapshot.docs.map(d => ({ id: d.id, fileName: d.data().fileName ?? "", chunk: d.data().chunk })));
         };
         fetchDocs();
       }
@@ -102,8 +101,8 @@ export default function TopicDetails() {
       setFile(null);
       const q = query(collection(db, "documents"), where("topicId", "==", topicId));
       const snapshot = await getDocs(q);
-      setDocuments(snapshot.docs.map(d => ({ id: d.id, ...d.data() })));
-    } catch (e) {
+  setDocuments(snapshot.docs.map(d => ({ id: d.id, fileName: d.data().fileName ?? "", chunk: d.data().chunk })));
+    } catch {
       setStatus("Error uploading");
     }
   };
@@ -124,7 +123,7 @@ export default function TopicDetails() {
       });
       const data = await res.json();
       setAnswer(data.answer || "No answer");
-    } catch (e) {
+    } catch {
       setAnswer("Error calling API");
     }
     setLoading(false);

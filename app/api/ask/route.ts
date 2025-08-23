@@ -27,7 +27,7 @@ export async function POST(request: Request) {
       ],
     });
     return NextResponse.json({ answer: completion.choices[0].message?.content || "No answer" });
-  } catch (e) {
-    return NextResponse.json({ answer: "Error calling OpenAI" }, { status: 500 });
+  } catch {
+    return NextResponse.json({ answer: "Error" });
   }
 }

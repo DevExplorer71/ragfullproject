@@ -4,10 +4,16 @@ import { auth } from "./firebaseConfig";
 import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 
 export default function FirebaseAuth() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<null | { displayName?: string | null }>(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, setUser);
+    const unsubscribe = onAuthStateChanged(auth, (u) => {
+      if (u) {
+        setUser({ displayName: u.displayName });
+      } else {
+        setUser(null);
+      }
+    });
     return () => unsubscribe();
   }, []);
 

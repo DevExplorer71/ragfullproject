@@ -5,12 +5,36 @@ import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import { useEffect, useState } from 'react';
 import { auth } from './firebaseConfig';
+import { User } from 'firebase/auth';
 export default function ProfilePage() {
-  const [user, setUser] = useState<null | { uid: string; email?: string }>(null);
+  const [user, setUser] = useState<null | { uid: string; email?: string | null; photoURL?: string | null; displayName?: string | null }>(null);
 
   useEffect(() => {
-    setUser(auth.currentUser);
-    const unsub = auth.onAuthStateChanged(setUser);
+    const setMappedUser = (u: User | null) => {
+      if (u) {
+        setUser({
+          uid: u.uid,
+          email: u.email ?? null,
+          photoURL: u.photoURL ?? null,
+          displayName: u.displayName ?? null
+        });
+      } else {
+        setUser(null);
+      }
+    };
+    setMappedUser(auth.currentUser);
+    const unsub = auth.onAuthStateChanged((u: User | null) => {
+      if (u) {
+        setUser({
+          uid: u.uid,
+          email: u.email ?? null,
+          photoURL: u.photoURL ?? null,
+          displayName: u.displayName ?? null
+        });
+      } else {
+        setUser(null);
+      }
+    });
     return () => unsub();
   }, []);
 

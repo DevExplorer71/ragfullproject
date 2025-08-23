@@ -16,7 +16,7 @@ export default function TopicsPage() {
     }
     const fetchTopics = async () => {
       const snapshot = await getDocs(collection(db, "topics"));
-      setTopics(snapshot.docs.map(d => ({ id: d.id, ...d.data() })));
+  setTopics(snapshot.docs.map(d => ({ id: d.id, name: d.data().name ?? "" })));
     };
     fetchTopics();
   }, [router]);

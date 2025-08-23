@@ -1,11 +1,8 @@
 "use client";
-import Image from "next/image";
-import styles from "./page.module.css";
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
-import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Home() {

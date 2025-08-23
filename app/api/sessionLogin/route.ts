@@ -25,6 +25,10 @@ export async function POST(request: Request) {
     });
     return response;
   } catch (error) {
-    return NextResponse.json({ status: "error", error: error.message }, { status: 401 });
+    let message = "Unknown error";
+    if (error instanceof Error) {
+      message = error.message;
+    }
+    return NextResponse.json({ status: "error", error: message }, { status: 401 });
   }
 }
