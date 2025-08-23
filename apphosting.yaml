@@ -6,6 +6,21 @@ runConfig:
   # concurrency: 80
   # cpu: 1
   # memoryMiB: 512
+  environment:
+  FIREBASE_SERVICE_ACCOUNT: |
+    {
+      "type": "service_account",
+      "project_id": "myragexample",
+      "private_key_id": "...",
+      "private_key": "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n",
+      "client_email": "...",
+      "client_id": "...",
+      "auth_uri": "...",
+      "token_uri": "...",
+      "auth_provider_x509_cert_url": "...",
+      "client_x509_cert_url": "...",
+      "universe_domain": "googleapis.com"
+    }
 
 # Environment variables and secrets.
 # env:
