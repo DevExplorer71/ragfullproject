@@ -11,6 +11,7 @@ export default function Home() {
     <Container maxWidth="sm" sx={{ mt: 8, textAlign: 'center' }}>
       <Typography variant="h3" gutterBottom>Welcome to the app</Typography>
       <Button variant="contained" color="primary" onClick={() => router.push("/login")}>Go to Login</Button>
+    <p>test 1</p>
     </Container>
   );
 }
