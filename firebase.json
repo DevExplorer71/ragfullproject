@@ -7,10 +7,8 @@
       "**/node_modules/**"
     ],
     "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
+      { "source": "/api/**", "function": "nextjs-server" },
+      { "source": "**", "function": "nextjs-server" }
     ]
   }
 }
