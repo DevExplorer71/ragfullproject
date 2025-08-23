@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import { useAuth } from '../AuthContext';
-"use client";
+
 export default function ProfilePage() {
   const { user, loading } = useAuth();
 
