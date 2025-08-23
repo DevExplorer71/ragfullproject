@@ -34,12 +34,29 @@ export default function Upload() {
   };
 
   return (
-    <div>
-      <h2>Upload Document</h2>
-      <input value={topic} onChange={e => setTopic(e.target.value)} placeholder="Topic" />
-      <input type="file" onChange={e => setFile(e.target.files?.[0] || null)} />
-      <button onClick={handleUpload}>Upload</button>
-      <p>{status}</p>
-    </div>
+    <Container maxWidth="sm" sx={{ mt: { xs: 4, md: 8 }, px: { xs: 2, md: 0 } }}>
+      <Typography variant="h4" gutterBottom align="center">Upload Document</Typography>
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <TextField
+          value={topic}
+          onChange={e => setTopic(e.target.value)}
+          placeholder="Topic"
+          label="Topic"
+          variant="outlined"
+          fullWidth
+        />
+        <Button variant="contained" component="label">
+          Choose File
+          <input type="file" hidden onChange={e => setFile(e.target.files?.[0] || null)} />
+        </Button>
+        <Button variant="contained" color="primary" onClick={handleUpload} disabled={!topic || !file}>
+          Upload
+        </Button>
+        <Typography variant="body2" color={status === "Uploaded!" ? "success.main" : "error.main"}>
+          {status}
+        </Typography>
+      </Box>
+    </Container>
+  );
   );
 }

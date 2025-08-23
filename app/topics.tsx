@@ -34,18 +34,35 @@ export default function TopicsPage() {
   };
 
   return (
-    <div style={{ maxWidth: 600, margin: "auto", padding: 32 }}>
-      <h2>Topics</h2>
-      <input value={newTopic} onChange={e => setNewTopic(e.target.value)} placeholder="New topic name" />
-      <button onClick={handleCreate}>Create Topic</button>
-      <ul>
+    <Container maxWidth="sm" sx={{ mt: { xs: 4, md: 8 }, px: { xs: 2, md: 0 } }}>
+      <Typography variant="h4" gutterBottom align="center">Topics</Typography>
+      <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: 2, mb: 2 }}>
+        <TextField
+          value={newTopic}
+          onChange={e => setNewTopic(e.target.value)}
+          placeholder="New topic name"
+          variant="outlined"
+          size="small"
+          fullWidth
+        />
+        <Button variant="contained" color="primary" onClick={handleCreate} sx={{ minWidth: 120 }}>
+          Create Topic
+        </Button>
+      </Box>
+      <List>
         {topics.map(t => (
-          <li key={t.id}>
-            <span style={{ cursor: "pointer", color: "blue" }} onClick={() => router.push(`/topics/${t.id}`)}>{t.name}</span>
-            <button onClick={() => handleDelete(t.id)} style={{ marginLeft: 8 }}>Delete</button>
-          </li>
+          <ListItem key={t.id} secondaryAction={
+            <Button variant="outlined" color="error" size="small" onClick={() => handleDelete(t.id)}>
+              Delete
+            </Button>
+          } disablePadding>
+            <ListItemButton onClick={() => router.push(`/topics/${t.id}`)}>
+              <ListItemText primary={t.name} />
+            </ListItemButton>
+          </ListItem>
         ))}
-      </ul>
-    </div>
+      </List>
+    </Container>
+  );
   );
 }
