@@ -1,12 +1,10 @@
 "use client";
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 
-import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const router = useRouter();
+
   return (
     <Container maxWidth="sm" sx={{ mt: { xs: 4, md: 8 }, textAlign: 'center', px: { xs: 2, md: 0 } }}>
       <Typography variant="h3" gutterBottom sx={{ fontSize: { xs: '2rem', md: '3rem' } }}>
