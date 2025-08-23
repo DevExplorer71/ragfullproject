@@ -1,9 +1,10 @@
 env:
-  OPENAI_API_KEY: "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"
-  FIREBASE_PROJECT_ID: "myragexample"
+  - variable: OPENAI_API_KEY
+    value: "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"
+  - variable: FIREBASE_PROJECT_ID
+    value: "myragexample"
 
 runConfig:
-  # Add other variables as needed
   minInstances: 0
   environment:
     FIREBASE_SERVICE_ACCOUNT: |
