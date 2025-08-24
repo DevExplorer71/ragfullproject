@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -14,7 +14,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [isRegister, setIsRegister] = useState(false);
+  // Registration removed
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -22,11 +22,7 @@ export default function LoginPage() {
     setError("");
     setLoading(true);
     try {
-      if (isRegister) {
-        await createUserWithEmailAndPassword(auth, email, password);
-      } else {
-        await signInWithEmailAndPassword(auth, email, password);
-      }
+      await signInWithEmailAndPassword(auth, email, password);
       setLoading(false);
       router.push("/topics");
     } catch (err: unknown) {
@@ -42,7 +38,7 @@ export default function LoginPage() {
   return (
     <Container maxWidth="xs" sx={{ mt: 8, boxShadow: 3, borderRadius: 2, p: 4 }}>
       <Typography variant="h5" gutterBottom align="center">
-        {isRegister ? "Register" : "Login"}
+        Login
       </Typography>
       <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
         <TextField
@@ -66,12 +62,9 @@ export default function LoginPage() {
           disabled={loading}
         />
         <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }} disabled={loading}>
-          {loading ? "Loading..." : isRegister ? "Register" : "Login"}
+          {loading ? "Loading..." : "Login"}
         </Button>
       </form>
-      <Button onClick={() => setIsRegister(r => !r)} color="secondary" fullWidth sx={{ mt: 2 }} disabled={loading}>
-        {isRegister ? "Already have an account? Login" : "Need an account? Register"}
-      </Button>
       {error && <Alert severity="error" sx={{ mt: 2 }}>{error}</Alert>}
     </Container>
   );
