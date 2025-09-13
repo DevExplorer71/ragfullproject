@@ -2,6 +2,8 @@
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
+import CookieNotice from '../components/CookieNotice';
+
 
 export default function Home() {
 
@@ -18,6 +20,7 @@ export default function Home() {
       <Typography variant="body2" sx={{ mt: 4, color: 'text.secondary', fontSize: { xs: '0.9rem', md: '1rem' } }}>
         Get started by logging in from the navbar above!
       </Typography>
+  <CookieNotice />
     </Container>
   );
 }
